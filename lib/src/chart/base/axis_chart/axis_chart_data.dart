@@ -121,7 +121,7 @@ typedef GetTitleWidgetFunction = Widget Function(double value, TitleMeta meta);
 Widget defaultGetTitle(double value, TitleMeta meta) {
   return SideTitleWidget(
     axisSide: meta.axisSide,
-    child: Text(meta.formattedValue, style: TextStyle(fontSize: 12)),
+    child: Text(meta.formattedValue, style: TextStyle(fontSize: 10)),
   );
 }
 
