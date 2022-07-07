@@ -121,9 +121,7 @@ typedef GetTitleWidgetFunction = Widget Function(double value, TitleMeta meta);
 Widget defaultGetTitle(double value, TitleMeta meta) {
   return SideTitleWidget(
     axisSide: meta.axisSide,
-    child: Text(
-      meta.formattedValue,
-    ),
+    child: Text(meta.formattedValue, style: TextStyle(fontSize: 12)),
   );
 }
 
@@ -144,6 +142,8 @@ class SideTitles with EquatableMixin {
   /// we try to find a suitable value to set as [interval] under the hood.
   final double? interval;
 
+  final double? font;
+
   /// It draws some title on an axis, per axis values,
   /// [showTitles] determines showing or hiding this side,
   ///
@@ -161,12 +161,14 @@ class SideTitles with EquatableMixin {
   /// we try to find a suitable value to set as [interval] under the hood.
   SideTitles({
     bool? showTitles,
+    double? font,
     GetTitleWidgetFunction? getTitlesWidget,
     double? reservedSize,
     double? interval,
   })  : showTitles = showTitles ?? false,
         getTitlesWidget = getTitlesWidget ?? defaultGetTitle,
         reservedSize = reservedSize ?? 22,
+        font = font ?? 12,
         interval = interval {
     if (interval == 0) {
       throw ArgumentError("SideTitles.interval couldn't be zero");
@@ -177,6 +179,7 @@ class SideTitles with EquatableMixin {
   static SideTitles lerp(SideTitles a, SideTitles b, double t) {
     return SideTitles(
       showTitles: b.showTitles,
+      font: b.font,
       getTitlesWidget: b.getTitlesWidget,
       reservedSize: lerpDouble(a.reservedSize, b.reservedSize, t),
       interval: lerpDouble(a.interval, b.interval, t),
@@ -189,12 +192,14 @@ class SideTitles with EquatableMixin {
     bool? showTitles,
     GetTitleWidgetFunction? getTitlesWidget,
     double? reservedSize,
+    double? font,
     double? interval,
   }) {
     return SideTitles(
       showTitles: showTitles ?? this.showTitles,
       getTitlesWidget: getTitlesWidget ?? this.getTitlesWidget,
       reservedSize: reservedSize ?? this.reservedSize,
+      font: font ?? this.font,
       interval: interval ?? this.interval,
     );
   }
@@ -205,6 +210,7 @@ class SideTitles with EquatableMixin {
         showTitles,
         getTitlesWidget,
         reservedSize,
+        font,
         interval,
       ];
 }
