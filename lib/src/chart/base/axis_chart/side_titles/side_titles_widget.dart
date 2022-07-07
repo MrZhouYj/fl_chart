@@ -191,7 +191,6 @@ class SideTitlesWidget extends StatelessWidget {
             Container(
               width: isHorizontal ? axisViewSize : sideTitles.reservedSize,
               height: isHorizontal ? sideTitles.reservedSize : axisViewSize,
-              color: Colors.green,
               margin: thisSidePadding,
               child: SideTitlesFlex(
                 direction: direction,
